@@ -9,11 +9,28 @@ This repository contains a complete, high-performance deep learning pipeline for
 
 ![Training Curves](img/training_curves.png)
 
-## 🧠 Model Architecture
-We utilize a custom **Attention 3D U-Net** designed specifically for the anisotropic nature of scroll volume data:
-- **Anisotropic Pooling**: `(1, 2, 2)` kernels preserve Z-axis resolution while downsampling spatial dimensions.
-- **Attention Gates**: Focus learning on relevant ink features.
-- **Lightweight Encoder**: Optimized for 8GB VRAM using gradient checkpointing and mixed precision.
+## 🧠 System Architecture
+
+### High-Level Data Pipeline
+Our system processes high-resolution 3D X-ray CT volumes through a specialized pipeline designed to handle signal normalization and topological consistency.
+
+![System Pipeline](img/graph_1.png)
+
+The workflow consists of:
+1.  **Normalization**: Auto-detection of 8-bit vs 16-bit encoding to ensure correct intensity scaling.
+2.  **Patching**: Dynamic 3D patch generation `(32, 128, 128)` with positive sampling bias to handle extreme class imbalance (<1% ink).
+3.  **Topology-Aware Training**: A composite loss function utilizing **clDice** to enforce structural continuity.
+4.  **Inference Aggregation**: Sliding window prediction with Gaussian-weighted blending to eliminate seam artifacts.
+
+### Model: Anisotropic 3D U-Net
+We utilize a custom **Attention 3D U-Net** designed specifically for the anisotropic nature of scroll volume data.
+
+![Model Architecture](img/graph_2.png)
+
+**Key Innovations:**
+- **Anisotropic Pooling**: Standard pooling `(2, 2, 2)` destroys Z-axis resolution. We use `(1, 2, 2)` kernels to downsample spatial dimensions while preserving depth, which is critical for resolving thin ink layers.
+- **Attention Gates**: Additive attention modules at skip connections allow the decoder to focus on relevant ink features while suppressing background noise from the encoder features.
+- **Lightweight Design**: Optimized for 8GB VRAM using gradient checkpointing, mixed precision (AMP), and a reduced feature base (`16` filters).
 
 ## 🛠️ Methodology
 The core innovation lies in the data pipeline and loss function:

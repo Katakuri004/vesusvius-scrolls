@@ -22,6 +22,6 @@ models/
 # Outputs
 debug_images/
 debug_data_check/
-img/
+# img/ # Commented out to allow images
 !img/training_curves.png
 !img/model_output_showcase.png
