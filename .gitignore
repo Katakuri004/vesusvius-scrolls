@@ -1,0 +1,27 @@
+# System
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/
+
+# Environment
+venv/
+.env
+
+# Data
+data/
+*.tif
+*.csv
+submission.zip
+submission_tifs/
+
+# Models
+models/
+*.pth
+
+# Outputs
+debug_images/
+debug_data_check/
+img/
+!img/training_curves.png
+!img/model_output_showcase.png
