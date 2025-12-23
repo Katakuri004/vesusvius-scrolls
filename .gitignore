@@ -16,7 +16,7 @@ submission.zip
 submission_tifs/
 
 # Models
-models/
+/models/
 *.pth
 
 # Outputs
