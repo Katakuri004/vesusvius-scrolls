@@ -1,9 +1,8 @@
 # Technical Documentation: Vesuvius Scroll Surface Detection
 
-**Author**: [Your Name/Team Name]  
+**Author**: Arpit Kumar  
 **Date**: December 2025  
-**Project**: Vesuvius Challenge - First Letters / Surface Volumes
-
+**Project**: Vesuvius Challenge - 3D Unet Model
 ---
 
 ## 1. Executive Summary

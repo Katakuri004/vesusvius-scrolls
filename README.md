@@ -1,15 +1,15 @@
-# Vesuvius Challenge: Ink Detection & Segmentation 📜
+# Vesuvius Challenge: Ink Detection & Segmentation
 
 This repository contains a complete, high-performance deep learning pipeline for solving the **Vesuvius Challenge** surface detection task on an 8GB GPU.
 
-## 🏆 Results
+## Results
 - **Dice Score**: `0.4398` (Validation)
 - **Merge Score**: `1.0000` (Perfect Topology Baseline)
 - **Visual Quality**: Clean segmentation of ink layers, successfully resolving the "blob" problem.
 
 ![Training Curves](img/training_curves.png)
 
-## 🧠 System Architecture
+## System Architecture
 
 ### High-Level Data Pipeline
 Our system processes high-resolution 3D X-ray CT volumes through a specialized pipeline designed to handle signal normalization and topological consistency.
@@ -32,7 +32,7 @@ We utilize a custom **Attention 3D U-Net** designed specifically for the anisotr
 - **Attention Gates**: Additive attention modules at skip connections allow the decoder to focus on relevant ink features while suppressing background noise from the encoder features.
 - **Lightweight Design**: Optimized for 8GB VRAM using gradient checkpointing, mixed precision (AMP), and a reduced feature base (`16` filters).
 
-## 🛠️ Methodology
+## Methodology
 The core innovation lies in the data pipeline and loss function:
 
 ### 1. Data Rectification
@@ -44,12 +44,12 @@ The core innovation lies in the data pipeline and loss function:
 - **Goal**: This forces the model to preserve the topological structure (skeleton) of the ink sheets, preventing mergers and breaks.
 - **Composite Loss**: `Loss = 0.4*BCE + 0.4*Dice + 0.2*clDice`.
 
-## 📸 Visual Results
+## Visual Results
 Below is an example of the model's output on a validation slice. Note the clear separation of valid ink from the background noise.
 
 ![Model Output](img/model_output_showcase.png)
 
-## 🚀 How to Run
+## How to Run
 
 ### Installation
 ```bash
@@ -70,7 +70,7 @@ jupyter notebook Training.ipynb
 python submission.py
 ```
 
-## 📂 File Structure
+## File Structure
 - `src/models/unet3d.py`: Model Architecture.
 - `src/losses/cldice.py`: Topology Loss implementation.
 - `src/data/dataset.py`: Robust 3D Datasets.
